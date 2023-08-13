@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="dev-ico.png">
+    <title>Code Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/javascript/javascript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/css/css.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.4.1/acorn.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.4.1/walk.js"></script>
+	
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
+	  .dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+	.CodeMirror span.cm-tag {
+        color: #485DFF;
+    }
+	  .navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+	padding-top: 5px;
+  margin-right: 10px;
+}
+
+.navbar-brand font {
+  font-size: 24px;
+  font-family: "Lora";
+}
+
+.navbar-nav > li > a {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+	</style>
+	
+    <style>
+        /* Stilurile pentru fereastra modală */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            width: 60%;
+        }
+
+        /* Stiluri pentru imagine */
+        #modal-image {
+            width: 50%;
+            float: right;
+            margin-right: 10px;
+        }
+
+        /* Stiluri suplimentare */
+        .center {
+            text-align: center;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Stiluri pentru modul întunecat */
+.dark-mode .CodeMirror {
+    background-color: #1e1e1e;
+    color:white;
+}
+.dark-mode .CodeMirror-cursor {
+    border-left: 2px solid #fff; /* Setează culoarea indicatorului de poziție în modul întunecat */
+}
+.dark-mode #editorContainer {
+    background-color: #1e1e1e;
+}.dark-mode #outputContainer {
+    background-color: #fff;
+    
+    border-left: 1px solid #555;
+}
+
+/* Stiluri pentru modul luminos */
+.CodeMirror {
+    font-family: monospace;
+    height: auto;
+    color: black;
+    direction: ltr;
+}
+
+#editorContainer {
+    flex: 1;
+    height: 100vh;
+    padding: 10px;
+}
+
+#outputContainer {
+    flex: 1;
+    padding: 10px;
+    border-left: 1px solid #ccc;
+}
+
+    </style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="" class="navbar-brand"><img src="dev.png" class="confirmed"
+            style="width:470px;height:65px;" /></a>
+        
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a id="runButton" href="#">Run</a></li>
+          
+		<li><a href="#" onclick="saveCodeToFile()">Save</a></li>
+        </ul>
+       <ul class="nav navbar-nav navbar-right">
+		   <li><a onClick="toggleDarkMode()" style="cursor:pointer;">Toggle Dark Mode</a></li>
+		<li><a onClick="openModal1()" style="cursor:pointer;">Supported Language</a></li>
+         
+        </ul>
+      </div>
+    </div>
+  </nav>
+	
+    <div id="editorContainer">
+		
+		<br>
+	<br>
+        <h2>Code Editor</h2>
+        <textarea id="codeEditor" style="width: 100%; height: 100%; border: none;"></textarea>
+       
+    </div>
+    <div id="outputContainer">
+		<br>
+	<br>	
+        <h2><font color="black">Output</font></h2>
+        <iframe id="outputFrame" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+
+    <script>
+        const codeEditor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
+        mode: 'htmlmixed',
+        lineNumbers: true,
+        theme: 'default',
+    });
+
+        const runButton = document.getElementById('runButton');
+        const outputFrame = document.getElementById('outputFrame');
+
+       runButton.addEventListener('click', () => {
+    const code = codeEditor.getValue();
+    const outputDocument = outputFrame.contentDocument;
+    
+    // Încarcă codul în iframe
+    outputDocument.open();
+    outputDocument.write(code);
+    outputDocument.close();
+    
+    // Verifică erorile de sintaxă folosind biblioteca "acorn"
+    
+});
+
+		function saveCodeToFile() {
+    const code = codeEditor.getValue(); // Obține codul din editor
+    const blob = new Blob([code], { type: 'text/html' }); // Crează un obiect Blob pentru conținutul codului
+
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); // Creează un URL pentru obiectul Blob
+    a.download = 'code.html'; // Setează numele fișierului pentru descărcare
+    a.style.display = 'none';
+
+    document.body.appendChild(a); // Adaugă elementul ancorei la corpul documentului
+    a.click(); // Simulează clic pe ancoră pentru descărcare
+
+    // Eliberează resursele
+    URL.revokeObjectURL(a.href);
+    document.body.removeChild(a);
+}
+// Funcția pentru comutarea modului întunecat
+function toggleDarkMode() {
+    const body = document.body;
+    body.classList.toggle('dark-mode');
+    
+    // Stocarea stării modului întunecat în localStorage
+    const isDarkMode = body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
+}
+
+// Verifică starea modului întunecat la încărcarea paginii
+window.onload = function () {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+    }
+};
+
+    </script>
+	<div id="modal" class="modal" onclick="closeModal1(event)">
+        <div class="modal-content">
+            <div>
+                
+				<h1 align="center">Supported Language:</h1>
+				<h5 align="center">watch for updates, more available languages may be added</h5>
+				<h3>• Html</h3>
+				<h3>• Css</h3>
+				<h3>• JavaScript</h3>
+			</div>
+            
+        </div>
+    </div>
+	<script>
+        // Funcția pentru deschiderea ferestrei modale
+        function openModal1() {
+            document.getElementById("modal").style.display = "block";
+        }
+
+        // Funcția pentru închiderea ferestrei modale
+        function closeModal1(event) {
+            if (event.target === document.getElementById("modal")) {
+                document.getElementById("modal").style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
