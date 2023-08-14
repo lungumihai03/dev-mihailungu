@@ -46,39 +46,7 @@
 }
 	</style>
 	
-    <style>
-        /* Stilurile pentru fereastra modală */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 20px;
-            width: 60%;
-        }
-
-        /* Stiluri pentru imagine */
-        #modal-image {
-            width: 50%;
-            float: right;
-            margin-right: 10px;
-        }
-
-        /* Stiluri suplimentare */
-        .center {
-            text-align: center;
-        }
-    </style>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -146,7 +114,7 @@
         </ul>
        <ul class="nav navbar-nav navbar-right">
 		   <li><a onClick="toggleDarkMode()" style="cursor:pointer;">Toggle Dark Mode</a></li>
-		<li><a onClick="openModal1()" style="cursor:pointer;">Supported Language</a></li>
+		
          
         </ul>
       </div>
@@ -237,31 +205,7 @@ window.onload = function () {
 };
 
     </script>
-	<div id="modal" class="modal" onclick="closeModal1(event)">
-        <div class="modal-content">
-            <div>
-                
-				<h1 align="center">Supported Language:</h1>
-				<h5 align="center">watch for updates, more available languages may be added</h5>
-				<h3>• Html</h3>
-				<h3>• Css</h3>
-				<h3>• JavaScript</h3>
-			</div>
-            
-        </div>
-    </div>
-	<script>
-        // Funcția pentru deschiderea ferestrei modale
-        function openModal1() {
-            document.getElementById("modal").style.display = "block";
-        }
-
-        // Funcția pentru închiderea ferestrei modale
-        function closeModal1(event) {
-            if (event.target === document.getElementById("modal")) {
-                document.getElementById("modal").style.display = "none";
-            }
-        }
-    </script>
+	
+	
 </body>
 </html>
