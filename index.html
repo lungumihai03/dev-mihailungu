@@ -2,29 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/x-icon" href="dev-ico.png">
-    <title>Code Editor</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/codemirror.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/javascript/javascript.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/htmlmixed/htmlmixed.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.3/mode/css/css.js"></script>
+    
+	<link rel="icon" type="image/x-icon" href="/dev-ico.png">
+    <title>Web Editor</title>
+  
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.4.1/acorn.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.4.1/walk.js"></script>
+
+	<style>
+	
+	.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+		background-color: #121212; /* Fundal întunecat */
+    color: white;
+}
+
+h2{
+	color: #000;
+	font-size: 6rem;
+	display: flex;
+}
+h2 span{
+	animation: animate 4s linear infinite;
+}
+
+h2 span:nth-child(1){
+	animation-delay: 0; 
+}
+h2 span:nth-child(2){
+	animation-delay: 0.1s; 
+}
+h2 span:nth-child(3){
+	animation-delay: 0.2s; 
+}
+h2 span:nth-child(4){
+	animation-delay: 0.4s; 
+}
+h2 span:nth-child(5){
+	animation-delay: 0.6s; 
+}
+h2 span:nth-child(6){
+	animation-delay: 0.8s; 
+}
+h2 span:nth-child(7){
+	animation-delay: 1s; 
+}
+h2 span:nth-child(8){
+	animation-delay: 1.1s; 
+}
+
+
+@keyframes animate{
+	0%,100%{
+		color: #fff;
+		filter: blur(2px);
+		text-shadow: 0 0 10px #00b3ff,
+					0 0 20px #00b3ff,
+					0 0 40px #00b3ff,
+					0 0 80px #00b3ff,
+					0 0 120px #00b3ff,
+					0 0 200px #00b3ff;
+	}
+
+	25%,75%{
+		color: #FFFFFF;
+		filter: blur(0);
+		text-shadow:none;
+	}
+}
+
+.content {
+    display: none; /* Conținutul real al paginii este ascuns inițial */
+	
+    justify-content: center; /* Centrează orizontal conținutul */
+    align-items: center; /* Centrează vertical conținutul */
+    min-height: 100vh; /* Ocupă întreaga înălțime a ecranului */
+}
+	
+		#header_img {
+			 max-width: 100%; /* Face imaginea să aibă o lățime maximă de 100% a ecranului */
+    height: auto; /* Menține proporțiile originale ale imaginii */
+		}
+	</style>
+	
 	
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
+	  .dark-mode .modal-content {
+            background-color: #333;
+            color: #fff;
+        }
 	  .dark-mode {
     background-color: #333;
     color: #fff;
 }
-	.CodeMirror span.cm-tag {
-        color: #485DFF;
+	  .row:after {
+      content: "";
+      display: table;
+      clear: both;
     }
+
 	  .navbar-brand {
   display: flex;
   align-items: center;
@@ -44,6 +126,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
 }
+	  
 	</style>
 	
     <style>
@@ -81,51 +164,99 @@
     </style>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
             margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+		align-content: center;
+		justify-content: center;
         }
-
-        /* Stiluri pentru modul întunecat */
-.dark-mode .CodeMirror {
-    background-color: #1e1e1e;
-    color:white;
-}
-.dark-mode .CodeMirror-cursor {
-    border-left: 2px solid #fff; /* Setează culoarea indicatorului de poziție în modul întunecat */
-}
-.dark-mode #editorContainer {
-    background-color: #1e1e1e;
-}.dark-mode #outputContainer {
-    background-color: #fff;
-    
-    border-left: 1px solid #555;
-}
-
-/* Stiluri pentru modul luminos */
-.CodeMirror {
-    font-family: monospace;
-    height: auto;
-    color: black;
-    direction: ltr;
-}
-
-#editorContainer {
-    flex: 1;
-    height: 100vh;
-    padding: 10px;
-}
-
-#outputContainer {
-    flex: 1;
-    padding: 10px;
-    border-left: 1px solid #ccc;
-}
+footer {
+      padding: 10px;
+      background-color: black;
+      color: white;
+      margin-top: auto;
+    }
+.container-fluid {
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: 0;
+		
+    }
+		
+		.row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+		.full-width-row {
+    width: 70vw;
+    margin-left: -5vw;
+    left: 15%;
+  }
+	  
+    * {
+      box-sizing: border-box;
+    }
 
     </style>
 </head>
 <body>
+	<div class="loader">
+        <h2>
+		<span>L</span>
+		<span>o</span>
+		<span>a</span>
+		<span>d</span>
+		<span>i</span>
+		<span>n</span>
+		<span>g</span>
+		<span>...</span>
+	</h2>
+		<h2>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+			<span> </span>
+		<span>D</span>
+			<span>E</span>
+			<span>V</span>
+			<span>.</span>
+			<span>M</span>
+			<span>I</span>
+			<span>H</span>
+			<span>A</span>
+			<span>I</span>
+			<span>L</span>
+			<span>U</span>
+			<span>N</span>
+			<span>G</span>
+			<span>U</span>
+			<span>.</span>
+			<span>C</span>
+			<span>O</span>
+			<span>M</span>
+		
+		</h2>
+    </div>
+	<script>
+	
+	document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        document.querySelector(".loader").style.display = "none";
+        document.querySelector(".content").style.display = "block";
+    }, 10000); // Afișează conținutul real după 10 secunde
+});
+
+	
+	</script>
+	<div class="content">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -139,11 +270,7 @@
         
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a id="runButton" href="#">Run</a></li>
-          
-		<li><a href="#" onclick="saveCodeToFile()">Save</a></li>
-        </ul>
+       
        <ul class="nav navbar-nav navbar-right">
 		   <li><a onClick="toggleDarkMode()" style="cursor:pointer;">Toggle Dark Mode</a></li>
 		<li><a onClick="openModal1()" style="cursor:pointer;">Supported Language</a></li>
@@ -152,61 +279,32 @@
       </div>
     </div>
   </nav>
-	
-    <div id="editorContainer">
-		
-		<br>
 	<br>
-        <h2>Code Editor</h2>
-        <textarea id="codeEditor" style="width: 100%; height: 100%; border: none;"></textarea>
-       
-    </div>
-    <div id="outputContainer">
+	<br>
 		<br>
-	<br>	
-        <h2><font color="black">Output</font></h2>
-        <iframe id="outputFrame" style="width: 100%; height: 100%; border: none;"></iframe>
-    </div>
 
+	<img id="header_img" src="header.png" height="auto">
+		
+		
+        
+        <div class="col-md-4 pb-1 pb-md-0">
+			<br>
+          <div class="card">
+            <a href="web-editor/"><img class="card-img-top" src="web-editor/web.png"  title="Web Editor" style="width: auto; height: auto"></a>
+            
+          </div>
+        <br>
+		  
+       
+        
+      </div>
+		<br>
+		
+		
+	</div>
+	
     <script>
-        const codeEditor = CodeMirror.fromTextArea(document.getElementById('codeEditor'), {
-        mode: 'htmlmixed',
-        lineNumbers: true,
-        theme: 'default',
-    });
-
-        const runButton = document.getElementById('runButton');
-        const outputFrame = document.getElementById('outputFrame');
-
-       runButton.addEventListener('click', () => {
-    const code = codeEditor.getValue();
-    const outputDocument = outputFrame.contentDocument;
-    
-    // Încarcă codul în iframe
-    outputDocument.open();
-    outputDocument.write(code);
-    outputDocument.close();
-    
-    // Verifică erorile de sintaxă folosind biblioteca "acorn"
-    
-});
-
-		function saveCodeToFile() {
-    const code = codeEditor.getValue(); // Obține codul din editor
-    const blob = new Blob([code], { type: 'text/html' }); // Crează un obiect Blob pentru conținutul codului
-
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); // Creează un URL pentru obiectul Blob
-    a.download = 'code.html'; // Setează numele fișierului pentru descărcare
-    a.style.display = 'none';
-
-    document.body.appendChild(a); // Adaugă elementul ancorei la corpul documentului
-    a.click(); // Simulează clic pe ancoră pentru descărcare
-
-    // Eliberează resursele
-    URL.revokeObjectURL(a.href);
-    document.body.removeChild(a);
-}
+      
 // Funcția pentru comutarea modului întunecat
 function toggleDarkMode() {
     const body = document.body;
@@ -252,5 +350,23 @@ window.onload = function () {
             }
         }
     </script>
+	<footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <font size="4"><p>© <span id="footer-year">2023</span> <font face="Lora" size="+1">Mihai Lungu</font></p></font>
+        </div>
+        <div class="col-md-6" align="right">
+          <p>
+            <a href="https://www.linkedin.com/in/lungu-mihai03/" target="_blank"><img src="https://www.mihailungu.com/resources/linkedin-logo.png" style="width: 50px;height: 50px"></a>
+
+            <a href="https://www.facebook.com/lungu.mihai03" target="_blank"><img src="https://www.mihailungu.com/resources/fb-logo.png" style="width: 50px;height: 50px"></a>
+
+            <a href="https://www.instagram.com/lungu.mihai03/" target="_blank"><img src="https://www.mihailungu.com/resources/ig-logo.png" style="width: 50px;height: 50px"></a>
+          </p>
+        </div>
+      </div>
+         </div>
+  </footer>
 </body>
 </html>
