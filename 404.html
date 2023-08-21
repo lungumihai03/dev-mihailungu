@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/x-icon" href="https://dev.mihailungu.com/dev-ico.png">
+    <title>404 Page</title>
+	<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
+  </style>
+    <style>
+        body {
+            display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+		background-color: #121212; /* Fundal întunecat */
+    color: white;
+        }
+		h1 {
+			font-size: 65px;
+		}
+		h2 {
+			font-size: 35px;
+		}
+		h3 {
+			font-size: 25px;
+		}
+        .title {
+            color: #000;
+            
+            display: flex;
+            animation: animate 4s linear infinite;
+        }
+
+        .title span {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes animate {
+            0%, 100% {
+                color: #fff;
+                filter: blur(2px);
+                text-shadow: 0 0 5px #00b3ff, 0 0 10px #00b3ff, 0 0 20px #00b3ff, 0 0 40px #00b3ff, 0 0 60px #00b3ff, 0 0 80px #00b3ff;
+            }
+
+            25%, 75% {
+                color: #FFFFFF;
+                filter: blur(0);
+                text-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+	<h3 class="title"><span><font face="Lora">DEV.MIHAILUNGU.COM</font></span></h3>
+    <h1  class="title"><span><font face="Lora">404</font></span></h1>
+    <h2 class="title"><span><font face="Lora">File not found</font></span></h2>
+    <h3 class="title"><span><font face="Lora">The site configured at this address does not contain the requested file.</font></span></h3>
+    
+		
+</body>
+</html>
