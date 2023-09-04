@@ -9,7 +9,56 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+	  
+	  .full-width-row {
+    width: 70vw;
+    margin-left: -5vw;
+    left: 15%;
+  }
+	  
+    * {
+      box-sizing: border-box;
+    }
 
+    /* Create three equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: auto;
+    }
+	  
+	  #column1 {
+      float: left;
+      width: 25%;
+      padding: 10px;
+      height: auto;
+    }
+
+	  #column2 {
+      float: right;
+      width: 70%;
+      padding: 10px;
+      height: auto;
+    }
+	  
+    /* Clear floats after the columns */
+	  
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+	  
+	  .about {
+		  padding-left: 5px;
+		  padding-right: 0;
+		  
+	  }
+	  
+	  
+  </style>
 	<style>
 	
 	.loader {
@@ -22,6 +71,8 @@
     color: white;
 }
 
+	
+		
 h2{
 	color: #000;
 	font-size: 6rem;
@@ -94,12 +145,13 @@ h2 span:nth-child(8){
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
 	  .dark-mode .modal-content {
-            background-color: #333;
-            color: #fff;
+            background-color: #FFFFFF;
+            color: #000000;
         }
+	  
 	  .dark-mode {
-    background-color: #333;
-    color: #fff;
+    background-color: #FFFFFF;
+            color: #000000;
 }
 	  .row:after {
       content: "";
@@ -144,7 +196,8 @@ h2 span:nth-child(8){
         }
 
         .modal-content {
-            background-color: #fefefe;
+            background-color: #333;
+    color: #fff;
             margin: 10% auto;
             padding: 20px;
             width: 60%;
@@ -170,7 +223,8 @@ h2 span:nth-child(8){
       flex-direction: column;
       min-height: 100vh;
 		align-content: center;
-		justify-content: center;
+		justify-content: center;background-color: #333;
+    color: #fff;
         }
 footer {
       padding: 10px;
@@ -251,7 +305,7 @@ footer {
     setTimeout(function () {
         document.querySelector(".loader").style.display = "none";
         document.querySelector(".content").style.display = "block";
-    }, 10000); // Afișează conținutul real după 10 secunde
+    }, 1000); // Afișează conținutul real după 10 secunde
 });
 
 	
@@ -271,7 +325,7 @@ footer {
       <div class="collapse navbar-collapse" id="myNavbar">
        
        <ul class="nav navbar-nav navbar-right">
-		   <li><a onClick="toggleDarkMode()" style="cursor:pointer;">Toggle Dark Mode</a></li>
+		   <li><a onClick="toggleDarkMode()" style="cursor:pointer;" id="toggle-dark-mode-button">Toggle White Mode</a></li>
 		<li><a onClick="openModal1()" style="cursor:pointer;">Supported Language</a></li>
          
         </ul>
@@ -309,7 +363,6 @@ footer {
 		
 		</center>
 		
-		
 	</div>
 	
     <script>
@@ -318,22 +371,23 @@ footer {
 function toggleDarkMode() {
     const body = document.body;
     body.classList.toggle('dark-mode');
-    
+
     // Stocarea stării modului întunecat în localStorage
     const isDarkMode = body.classList.contains('dark-mode');
     localStorage.setItem('darkMode', isDarkMode);
+
+    // Actualizare text buton
+    const toggleButton = document.getElementById('toggle-dark-mode-button');
+    if (isDarkMode) {
+        toggleButton.textContent = 'Toggle Dark Mode';
+    } else {
+        toggleButton.textContent = 'Toggle White Mode';
+    }
 }
 
-// Verifică starea modului întunecat la încărcarea paginii
-window.onload = function () {
-    const isDarkMode = localStorage.getItem('darkMode') === 'true';
-    if (isDarkMode) {
-        document.body.classList.add('dark-mode');
-    }
-};
 
     </script>
-	<div id="modal" class="modal" onclick="closeModal1(event)">
+	<div id="modal" class="modal mo" onclick="closeModal1(event)">
         <div class="modal-content">
             <div>
                 
@@ -363,7 +417,7 @@ window.onload = function () {
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <font size="4"><p>© <span id="footer-year">2023</span> <font face="Lora" size="+1">DEV Mihai Lungu</font></p></font>
+          <font size="4"><p>© <span id="footer-year">2023</span> <font face="Lora" size="+1">Mihai Lungu</font></p></font>
         </div>
         <div class="col-md-6" align="right">
           <p>
