@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 <head>
-    <meta charset="UTF-8">
-	<link rel="icon" type="image/x-icon" href="https://dev.mihailungu.com/dev-ico.png">
-    <title>404 Page</title>
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>404 ERROR</title>
+    <link rel="icon" type="image/x-icon" href="https://media.mihailungu.com/resources/images/poza.jpg">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script>
@@ -14,108 +15,14 @@
             footerYear.textContent = currentYear;
         });
     </script>
-	<style>
-    @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
-		
-  </style>
     <style>
-		.mijloc {
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-right: auto;
-            margin-left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-direction: column;
-            text-align: left;
-            margin: 0 auto;
-        }
-        body {
-			margin: 0;
-            padding: 0;
-           
-            display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    min-height: 100vh;
-		background-color: #171717; /* Fundal întunecat */
-    color: white;
-        }
-		h1 {
-			font-size: 65px;
-		}
-		h2 {
-			font-size: 35px;
-		}
-		h3 {
-			font-size: 25px;
-		}
-        .title {
-            color: #000;
-            
-            display: flex;
-            animation: animate 4s linear infinite;
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,500&display=swap');
+        * {
+            box-sizing: border-box;
         }
 
-        .title span {
-            animation-delay: 0.3s;
-        }
-
-        @keyframes animate {
-            0%, 100% {
-                color: #fff;
-                filter: blur(1px);
-                text-shadow: 0 0 5px #00b3ff, 0 0 10px #00b3ff, 0 0 15px #00b3ff, 0 0 20px #00b3ff;
-            }
-
-            25%, 75% {
-                color: #FFFFFF;
-                filter: blur(0);
-                text-shadow: none;
-            }
-        }
-		.back-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: rgba(255, 255, 255, 0.1); 
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 9999;
-    backdrop-filter: blur(5px);
-    transition: background-color 0.2s ease; 
-}
-
-.back-button:hover {
-    background-color: rgba(255, 255, 255, 0.3); 
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
-		
-		
-.back-button a {
-    text-decoration: none;
-    color: #000000;
-    font-weight: bold;
-    font-size: 16px;
-}
-
-/* Stiluri pentru săgeată */
-.back-button span::before {
-    content: "\2190"; /* Codul pentru săgeata la stânga (&larr;) */
-    margin-right: 5px;
-    font-size: 30px;
-}
-		 footer {
-            padding: 10px;
-            background-color: black;
-            color: white;
-            margin-top: auto;
-        }
-
-       .column {
+        /* Create three equal columns that float next to each other */
+        .column {
             float: left;
             width: 50%;
             padding: 10px;
@@ -142,10 +49,94 @@
             display: table;
             clear: both;
         }
-		.content {
+
+        .about {
+            padding-left: 5px;
+            padding-right: 0;
+        }
+
+        .dropdown-menu {
+            background-color: #333;
+        }
+
+        .dropdown-menu > li > a {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        .dropdown-menu > li > a:hover {
+            background-color: #444;
+        }
+
+        .dropdown-menu > li > a > font {
+            color: #fff;
+        }
+
+        .all-browsers {
+            margin: 0;
+            padding: 15px;
+            background-color: lightgray;
+        }
+
+        .all-browsers > h1,
+        .browser {
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .browser {
+            background: white;
+        }
+
+        .browser > h2,
+        p {
+            margin: 4px;
+            font-size: 100%;
+        }
+
+        body {
+			
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .mijloc {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .content {
             flex: 1;
         }
-#container {
+
+        footer {
+            padding: 10px;
+            background-color: black;
+            color: white;
+            margin-top: auto;
+        }
+
+        .container-fluid {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        #container {
             margin: 0 auto;
             max-width: 1850px;
         }
@@ -154,53 +145,94 @@
             width: 100%;
             padding: 0px;
         }
-		.alb {
-			
-			margin-top: 66.8vh;
-			background-color: white;
-			width: auto;
-			height: 2px;
-		}
+		.img-footer {
+    
+    transition: filter 0.35s ease-in-out;
+}
+
+.img-footer:hover {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+}
+
+	
+		
+
+       /* Stiluri pentru butonul cu săgeată */
+/* Stiluri pentru butonul cu săgeată */
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    transition: background-color 0.2s ease; 
+}
+
+.back-button:hover {
+    background-color: rgba(255, 255, 255, 0.4); 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.back-button a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Stiluri pentru săgeată */
+.back-button span::before {
+    content: "\2190"; /* Codul pentru săgeata la stânga (&larr;) */
+    margin-right: 5px;
+    font-size: 30px;
+}
+
     </style>
 </head>
+
 <body>
-	<div class="mijloc"> 
-	<h2 class="title"><span><font face="Lora">DEV.MIHAILUNGU.COM</font></span></h2>
-    <h3  class="title"><span>404. That's an error.</span></h3>
-    <h3 class="title"><span>The requested URL /error was not found on this server.</span></h3>
-    <h3 class="title"><span>That's all we know.</span></h3>
-    <div class="back-button" id="goBackButton" style="cursor:pointer;" >
+<div class="mijloc">
+    <br><br><br><br><br><br><br><br><br><br><br>
+    <h2><font face="lora">MIHAILUNGU.COM</font></h2>
+    <h3>404. <font color="#959595">That's an error.</font></h3>
+    <br>
+    <h3>The requested URL /error was not found on this server.</h3>
+    <h3><font color="#959595">That's all we know.</font></h3>
+    <!-- Updated back button with arrow -->
+  <div class="back-button" id="goBackButton" style="cursor:pointer;" >
    
-    <span class="title"><font face="Lora" size="+3">Go to Previous Page</font> </span>
+    <span><font face="Lora" size="+2">Go to Previous Page</font> </span>
 		</div>
-	</div>
-	
-	<script>
+
+
+</div>
+<script>
     document.getElementById('goBackButton').addEventListener('click', function () {
         window.history.back();
     });
 </script>
-	<div class="alb">
-	
-	</div>
-		<footer>
+<footer>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <font size="4" class="title"><h4>© <span id="footer-year" ></span> <font face="Lora" size="+1">Mihai Lungu</font></h4></font>
+                <font size="4"><p>© <span id="footer-year"></span> <font face="Lora" size="+1">Mihai Lungu</font></p></font>
             </div>
             <div class="col-md-6" align="right">
-                <p >
+                <p>
                     <a href="https://x.com/lungu_mihai03/" target="_blank"><img
-                            src="https://media.mihailungu.com/resources/x-logo.png" style="width: 50px;height: 50px" /></a>
+                            src="https://media.mihailungu.com/resources/x-logo.png" style="width: 50px;height: 50px" class="img-footer"/></a>
                     <a href="https://www.linkedin.com/in/lungu-mihai03/" target="_blank"><img
-                            src="https://media.mihailungu.com/resources/linkedin-logo.png" style="width: 50px;height: 50px" /></a>
+                            src="https://media.mihailungu.com/resources/linkedin-logo.png" style="width: 50px;height: 50px" class="img-footer"/></a>
 
                     <a href="https://www.facebook.com/lungu.mihai03" target="_blank"><img
-                            src="https://media.mihailungu.com/resources/fb-logo.png" style="width: 50px;height: 50px" /></a>
+                            src="https://media.mihailungu.com/resources/fb-logo.png" style="width: 50px;height: 50px" class="img-footer"/></a>
 
                     <a href="https://www.instagram.com/lungu.mihai03/" target="_blank"><img
-                            src="https://media.mihailungu.com/resources/ig-logo.png" style="width: 50px;height: 50px" /></a>
+                            src="https://media.mihailungu.com/resources/ig-logo.png" style="width: 50px;height: 50px" class="img-footer"/></a>
                 </p>
             </div>
         </div>
